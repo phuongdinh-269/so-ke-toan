@@ -729,8 +729,8 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 <section class="view active" id="view-dashboard">
   <div class="page-title"><span>Tổng quan</span><span class="page-meta" id="dashDate"></span></div>
   <div class="content">
-    <div class="stat-panels" id="dashStats"></div>
     <div class="quickstart" id="quickStart"></div>
+    <div class="stat-panels" id="dashStats"></div>
     <div class="dash-main">
       <div class="dash-left">
         <div class="panel">
@@ -2232,14 +2232,15 @@ input.open-input[type=number]{border-radius:10px;height:28px}
       <button class="modal-close" data-action="close-modal" data-target="#helpModal">×</button>
     </div>
     <div class="modal-body help-guide">
-      <div class="hint-bar"><strong>Chưa quen phần mềm?</strong> Chỉ cần làm theo 6 nhóm việc dưới đây. Mỗi màn hình đều có nút <strong>+ Thêm...</strong> để bắt đầu.</div>
+      <div class="hint-bar"><strong>Chưa quen phần mềm?</strong> Chỉ cần làm theo 7 nhóm việc dưới đây. Mỗi màn hình đều có nút <strong>+ Thêm...</strong> để bắt đầu.</div>
       <div class="help-steps">
-        <div class="help-step"><strong>1. Bán hàng</strong><span>Hàng hóa → Xuất hàng → “+ Tạo phiếu xuất”. Chọn khách hàng, thêm dòng hàng, chọn thanh toán rồi Lưu.</span></div>
-        <div class="help-step"><strong>2. Nhập hàng &amp; kho</strong><span>Hàng hóa → Nhập hàng → “+ Tạo phiếu nhập”. Phiếu mua sửa được; phiếu NKTP tự động từ sản xuất thì sửa tại Lệnh sản xuất.</span></div>
-        <div class="help-step"><strong>3. Ghi nhận chi phí</strong><span>Thu &amp; Chi → Hạch toán chi phí → “+ Ghi nhận chi phí”. Mỗi dòng là một khoản chi; chọn nguồn tiền mặt/ngân hàng/tạm ứng.</span></div>
-        <div class="help-step"><strong>4. Tạm ứng nhân viên</strong><span>Thu &amp; Chi → Tạm ứng – hoàn ứng → “+ Tạo tạm ứng / hoàn ứng”. Chi tiêu từ tạm ứng được trừ tự động khi ghi chi phí.</span></div>
-        <div class="help-step"><strong>5. Sản xuất &amp; giá thành</strong><span>Định mức → Lệnh sản xuất → Giá thành. Ở trang Giá thành, làm theo thứ tự 1 → 2 → 3.</span></div>
-        <div class="help-step"><strong>6. Báo cáo</strong><span>Báo cáo → chọn báo cáo cần xem. Các mã màu xanh có thể bấm để mở chứng từ chi tiết.</span></div>
+        <div class="help-step"><strong>1. Nhập số dư đầu kỳ</strong><span>Vào <a class="link-blue" data-action="open-data-from-help">Dữ liệu &amp; cài đặt</a> → khai báo tiền mặt, ngân hàng, công nợ và tồn kho trước khi nhập chứng từ.</span></div>
+        <div class="help-step"><strong>2. Bán hàng</strong><span>Hàng hóa → Xuất hàng → “+ Tạo phiếu xuất”. Chọn khách hàng, thêm dòng hàng, chọn thanh toán rồi Lưu.</span></div>
+        <div class="help-step"><strong>3. Nhập hàng &amp; kho</strong><span>Hàng hóa → Nhập hàng → “+ Tạo phiếu nhập”. Phiếu mua sửa được; phiếu NKTP tự động từ sản xuất thì sửa tại Lệnh sản xuất.</span></div>
+        <div class="help-step"><strong>4. Ghi nhận chi phí</strong><span>Thu &amp; Chi → Hạch toán chi phí → “+ Ghi nhận chi phí”. Mỗi dòng là một khoản chi; chọn nguồn tiền mặt/ngân hàng/tạm ứng.</span></div>
+        <div class="help-step"><strong>5. Tạm ứng nhân viên</strong><span>Thu &amp; Chi → Tạm ứng – hoàn ứng → “+ Tạo tạm ứng / hoàn ứng”. Chi tiêu từ tạm ứng được trừ tự động khi ghi chi phí.</span></div>
+        <div class="help-step"><strong>6. Sản xuất &amp; giá thành</strong><span>Định mức → Lệnh sản xuất → Giá thành. Ở trang Giá thành, làm theo thứ tự 1 → 2 → 3.</span></div>
+        <div class="help-step"><strong>7. Báo cáo</strong><span>Báo cáo → chọn báo cáo cần xem. Các mã màu xanh có thể bấm để mở chứng từ chi tiết.</span></div>
       </div>
       <h4>Mẹo dùng nhanh</h4>
       <ul>
@@ -3783,11 +3784,11 @@ function renderQuickStart() {
       '<span><span class="qs-title">' + title + '</span><span class="qs-desc">' + desc + '</span></span>' +
     '</button>';
   wrap.innerHTML =
+    card('help', 'Hướng dẫn', 'Nhập số dư đầu kỳ và cách dùng cơ bản', 'data-action="open-help"') +
     card('cart', 'Bán hàng', 'Tạo phiếu xuất bán, thu tiền', 'data-action="new-doc" data-mode="export"') +
     card('download', 'Nhập hàng', 'Tạo phiếu nhập kho hàng hóa', 'data-action="new-doc" data-mode="import"') +
     card('receipt', 'Ghi chi phí', 'Chi phí tiền mặt, ngân hàng, tạm ứng', 'data-action="new-expense"') +
-    card('wallet', 'Tạm ứng', 'Tạo tạm ứng / hoàn ứng nhân viên', 'data-action="new-advance"') +
-    card('help', 'Hướng dẫn', 'Xem cách dùng cho người mới', 'data-action="open-help"');
+    card('wallet', 'Tạm ứng', 'Tạo tạm ứng / hoàn ứng nhân viên', 'data-action="new-advance"');
 }
 
 function renderDashboard() {
