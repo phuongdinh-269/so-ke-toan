@@ -421,13 +421,13 @@ body{
 ::selection{background:#bfe8dd;color:var(--ink)}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:#e7c9b7;border-radius:10px;border:2px solid transparent;background-clip:padding-box}
-.topbar{height:56px;background:rgba(255,251,246,.94);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);border-radius:20px;margin:12px 16px 0;top:10px;color:var(--ink);box-shadow:0 12px 30px rgba(173,110,83,.16)}
+.topbar{height:64px;background:rgba(255,251,246,.97);backdrop-filter:blur(12px);border:0;border-bottom:1px solid rgba(255,255,255,.85);border-radius:0 0 20px 20px;margin:0;top:0;padding:0 max(22px,calc((100% - 1600px)/2 + 22px));color:var(--ink);box-shadow:0 12px 26px rgba(173,110,83,.14)}
 .brand{padding:0 18px;min-width:196px;background:transparent}
 .brand-logo{width:34px;height:34px;background:linear-gradient(135deg,#f2896d,#f4bd63);box-shadow:0 8px 16px rgba(239,123,100,.35)}
 .brand strong{color:var(--ink);font-size:14.5px;font-weight:800}
 .brand small{color:#b6a296;font-size:9px;letter-spacing:.09em}
 .topnav{gap:2px;padding:0 4px}
-.nav-link{height:40px;margin:8px 1px;padding:0 13px;border:0;border-radius:999px;color:var(--ink-2);font-weight:600;font-size:12.5px;gap:6px}
+.nav-link{height:40px;margin:12px 1px;padding:0 13px;border:0;border-radius:999px;color:var(--ink-2);font-weight:600;font-size:12.5px;gap:6px}
 .nav-link svg{opacity:1;color:var(--tea-dark)}
 .nav-link:hover{background:rgba(47,157,143,.09);color:var(--ink)}
 .nav-link.active{background:var(--ink);color:#fff;box-shadow:0 8px 18px rgba(47,42,48,.22)}
@@ -573,7 +573,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 .tag-purple{background:#efe9fb;color:#7b62c4}
 .tag-gray{background:#f5eee8;color:#8f8177}
 .cash-layout{grid-template-columns:238px minmax(0,1fr);gap:14px;padding:12px 22px 0}
-.cash-side{background:rgba(255,251,246,.94);border:1px solid #f2e2d6;border-radius:18px;top:78px;min-height:0;max-height:calc(100vh - 96px);box-shadow:0 12px 28px rgba(180,110,80,.08);padding:0 0 10px}
+.cash-side{background:rgba(255,251,246,.94);border:1px solid #f2e2d6;border-radius:18px;top:76px;min-height:0;max-height:calc(100vh - 92px);box-shadow:0 12px 28px rgba(180,110,80,.08);padding:0 0 10px}
 .side-search{border-bottom:1px dashed #f2e3d7;padding:12px}
 .side-search input{border-radius:999px;border:1px solid #ecdccf;height:32px;background:#fffdfb}
 .side-title{color:var(--tea-dark);padding:0 4px}
@@ -585,6 +585,13 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 .side-link:hover{background:#fff2e9;color:var(--tea-dark)}
 .side-link.active{background:var(--mint);color:var(--tea-dark);border:0;box-shadow:none;padding-left:10px}
 .side-link .x{color:#c8b6a8}
+.side-sub{display:flex;align-items:center;gap:7px;margin:1px 8px 1px 18px;padding:7px 10px;font-size:12px}
+.side-sub::before{content:"";width:6px;height:6px;border-radius:50%;background:#8fd3c6;flex:none}
+.side-sub.active::before{background:var(--tea-dark)}
+.side-manage{margin:6px 8px 2px;color:var(--tea-dark);font-weight:700;font-size:11.5px}
+#bankbookAccount{max-width:250px}
+#bankAccountsBody td{padding:6px 8px;vertical-align:middle}
+#bankAccountsBody input{width:100%;min-width:110px}
 .cash-titlebar{background:linear-gradient(135deg,#3cb3a2,#2f9d8f);border-radius:14px;height:46px;padding:0 14px;box-shadow:0 12px 24px rgba(47,157,143,.22);margin-bottom:14px}
 .cash-titlebar .ct-left{font-size:12px;letter-spacing:.35px}
 .ct-icon{border:0;background:rgba(255,255,255,.18);border-radius:10px;width:28px;height:28px}
@@ -604,7 +611,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 .ic-green{background:#4caf8f}
 .ic-yellow{background:#e7a93f}
 .report-toolbar{background:var(--card);border:1px solid #f4e5d9;border-radius:16px;padding:12px 14px;box-shadow:0 10px 22px rgba(180,110,80,.06)}
-.report-side{background:var(--card);border:1px solid #f4e5d9;border-radius:18px;box-shadow:0 12px 28px rgba(180,110,80,.08);top:80px;max-height:calc(100vh - 96px);padding:8px 0}
+.report-side{background:var(--card);border:1px solid #f4e5d9;border-radius:18px;box-shadow:0 12px 28px rgba(180,110,80,.08);top:76px;max-height:calc(100vh - 92px);padding:8px 0}
 .report-side .report-group{color:#a4958a}
 .report-side button{border-radius:10px;margin:1px 6px;width:calc(100% - 12px);color:#6c5f58;font-weight:600;padding:9px 10px}
 .report-side button:hover{background:#fff3ea;color:var(--tea-dark)}
@@ -674,9 +681,10 @@ input.open-input[type=number]{border-radius:10px;height:28px}
   .nav-link{height:38px;margin:3px 1px}
   .menu{top:calc(100% + 6px)}
   .quickbar{height:50px}
+  .cash-side,.report-side{top:118px;max-height:calc(100vh - 134px)}
 }
 @media(max-width:1000px){
-  .topbar{margin:8px 8px 0;border-radius:16px;top:6px;height:auto}
+  .topbar{margin:0;border-radius:0 0 16px 16px;top:0;height:auto;padding:0 12px}
   .brand{min-width:0;height:50px;padding:0 10px;gap:7px}
   .brand-logo{width:30px;height:30px}
   .brand strong{font-size:13px}
@@ -1146,6 +1154,8 @@ input.open-input[type=number]{border-radius:10px;height:28px}
         <div class="side-link active" data-cash-account="all">Tất cả</div>
         <div class="side-link" data-cash-account="cash">TIỀN MẶT</div>
         <div class="side-link" data-cash-account="bank">NGÂN HÀNG</div>
+        <div id="cashBankAccounts"></div>
+        <div class="side-link side-manage" data-action="manage-bank-accounts">+ Quản lý tài khoản ngân hàng</div>
       </div>
       <div class="side-head"><span>Phương thức</span></div>
       <div class="side-list">
@@ -1276,8 +1286,10 @@ input.open-input[type=number]{border-radius:10px;height:28px}
           <input type="date" id="bankbookTo" data-period="bankbook" title="Đến ngày">
           <button class="btn" data-period-all="bankbook">Tất cả</button>
         </div>
+        <select class="compact" id="bankbookAccount" title="Chọn tài khoản ngân hàng"></select>
       </div>
       <div class="right">
+        <button class="btn" data-action="manage-bank-accounts">Quản lý tài khoản</button>
         <button class="btn" data-action="new-cash" data-type="in" data-method="bank">+ Phiếu thu</button>
         <button class="btn btn-primary" data-action="new-cash" data-type="out" data-method="bank">+ Phiếu chi</button>
       </div>
@@ -1459,6 +1471,13 @@ input.open-input[type=number]{border-radius:10px;height:28px}
         <div class="opening-grid" id="openingCards"></div>
         <div class="muted small" id="openingSummary" style="margin-top:10px"></div>
       </div>
+    </div>
+    <div class="panel" style="margin-bottom:12px">
+      <div class="panel-head">
+        <div class="panel-title">Tài khoản ngân hàng</div>
+        <button class="btn btn-sm" data-action="manage-bank-accounts">Quản lý tài khoản</button>
+      </div>
+      <div class="panel-body" id="bankAccountsSummary"></div>
     </div>
     <div class="data-grid">
       <div class="panel">
@@ -2097,6 +2116,29 @@ input.open-input[type=number]{border-radius:10px;height:28px}
   </div>
 </div>
 
+<div class="modal" id="bankAccountsModal">
+  <div class="modal-box wide">
+    <div class="modal-head">
+      <h3>Quản lý tài khoản ngân hàng</h3>
+      <button class="modal-close" data-action="close-modal" data-target="#bankAccountsModal">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="muted small" style="margin-bottom:10px">Mỗi tài khoản có số dư đầu kỳ riêng. Số dư đầu kỳ tổng của ngân hàng sẽ tự cộng từ các tài khoản bên dưới.</p>
+      <div class="table-wrap">
+        <table class="grid report-grid">
+          <thead><tr><th style="min-width:180px">Ngân hàng</th><th style="min-width:180px">Số tài khoản</th><th class="num" style="width:170px">Số dư đầu kỳ</th><th style="width:60px"></th></tr></thead>
+          <tbody id="bankAccountsBody"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-outline btn-sm" data-action="add-bank-account-row" style="margin-top:10px">+ Thêm tài khoản</button>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-action="close-modal" data-target="#bankAccountsModal">Hủy</button>
+      <button class="btn btn-primary" data-action="save-bank-accounts">Lưu tài khoản</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="cashModal">
   <div class="modal-box wide">
     <div class="modal-head">
@@ -2113,6 +2155,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
             <option value="bank">Ngân hàng</option>
           </select>
         </div>
+        <div class="field full" id="cBankAccountField" hidden><label>Tài khoản ngân hàng</label><select id="cBankAccount"></select></div>
         <div class="field"><label>Người nộp / nhận</label><input type="text" id="cPartner" list="allPartnerSuggestions" placeholder="Tên đối tác hoặc nhân viên"></div>
         <div class="field"><label>Lý do</label><input type="text" id="cNote" placeholder="Diễn giải giao dịch"></div>
       </div>
@@ -2342,6 +2385,8 @@ const state = {
   debtFilters: { ap: null, ar: null, employee: null },
   debtFilterOpenKind: 'ap',
   cashAccount: 'all',
+  bankbookAccount: 'all',
+  bankDraft: [],
   cashType: 'all',
   cashCode: '',
   cashPartner: '',
@@ -2368,6 +2413,10 @@ const state = {
 };
 
 function save() {
+  if (Array.isArray(db.cash) && Array.isArray(db.bankAccounts) && db.bankAccounts.length) {
+    const ids = db.bankAccounts.map(a => a.id);
+    db.cash.forEach(c => { if (c.method === 'bank' && ids.indexOf(c.bankAccountId) === -1) c.bankAccountId = ids[0]; });
+  }
   try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {}
 }
 
@@ -2378,6 +2427,7 @@ function load() {
       db = sampleData();
       ensureCalcRuns();
       ensureOpeningData();
+      ensureBankAccounts();
       ensureProductOpeningCosts();
       ensureMaterialOpeningCosts();
       syncExpenses();
@@ -2415,7 +2465,8 @@ function load() {
       partners: migratePartners(d),
       employees: Array.isArray(d.employees) ? d.employees : sampleEmployees(),
       docs: Array.isArray(d.docs) ? d.docs : [],
-      cash: Array.isArray(d.cash) ? d.cash : []
+      cash: Array.isArray(d.cash) ? d.cash : [],
+      bankAccounts: Array.isArray(d.bankAccounts) ? d.bankAccounts : []
     };
     const sampleRefs = { LSX001: ['ĐH001', 'HĐ-2026-01'], LSX002: ['ĐH001', 'HĐ-2026-02'], LSX003: ['ĐH002', 'HĐ-2026-02'] };
     db.productions.forEach(o => {
@@ -2434,6 +2485,7 @@ function load() {
       db.openingCash = Math.round(total / 2);
       db.openingBank = total - db.openingCash;
     }
+    ensureBankAccounts();
     ensureProductOpeningCosts();
     ensureMaterialOpeningCosts();
     db.materialReceipts.forEach(r => {
@@ -2454,6 +2506,7 @@ function load() {
     db = sampleData();
     ensureCalcRuns();
     ensureOpeningData();
+    ensureBankAccounts();
     ensureProductOpeningCosts();
     ensureMaterialOpeningCosts();
     syncExpenses();
@@ -2675,6 +2728,64 @@ function docTotal(doc) { return (doc.lines || []).reduce((s, l) => s + Number(l.
 function docCost(doc) { return (doc.lines || []).reduce((s, l) => s + Number(l.qty) * Number(l.cost || 0), 0); }
 function docProfit(doc) { return docTotal(doc) - docCost(doc); }
 function methodLabel(m) { return m === 'bank' ? 'Ngân hàng' : (m === 'advance' ? 'Tạm ứng' : 'Tiền mặt'); }
+
+function bankAccountLabel(a, withNumber) {
+  if (!a) return 'Ngân hàng';
+  const name = String(a.bankName || a.name || 'Ngân hàng').trim();
+  const no = String(a.accountNo || '').trim();
+  return withNumber && no ? name + ' · ' + no : name;
+}
+
+function getBankAccount(id) { return (db.bankAccounts || []).find(a => a.id === id) || null; }
+
+function bankOpeningTotal() { return (db.bankAccounts || []).reduce((s, a) => s + (Number(a.opening) || 0), 0); }
+
+function seedBankAccounts(total) {
+  const t = Math.max(0, Number(total) || 0);
+  const first = Math.round(t * 0.6);
+  const second = Math.round(t * 0.25);
+  return [
+    { id: uid('ba'), bankName: 'Vietcombank', accountNo: '0071000123456', opening: first },
+    { id: uid('ba'), bankName: 'Techcombank', accountNo: '19036788888', opening: second },
+    { id: uid('ba'), bankName: 'MB Bank', accountNo: '0123456789', opening: t - first - second }
+  ];
+}
+
+function ensureBankAccounts() {
+  if (!Array.isArray(db.bankAccounts)) db.bankAccounts = [];
+  if (!db.bankAccounts.length) db.bankAccounts = seedBankAccounts(db.openingBank);
+  db.bankAccounts = db.bankAccounts.map((a, i) => ({
+    id: a.id || uid('ba'),
+    bankName: String(a.bankName || a.name || ('Ngân hàng ' + (i + 1))).trim(),
+    accountNo: String(a.accountNo || '').trim(),
+    opening: Math.max(0, Number(a.opening) || 0)
+  }));
+  const ids = db.bankAccounts.map(a => a.id);
+  (db.cash || []).forEach(c => {
+    if (c.method === 'bank' && ids.indexOf(c.bankAccountId) === -1) c.bankAccountId = ids[0];
+  });
+  db.openingBank = bankOpeningTotal();
+}
+
+function cashAccountMethod(acct) {
+  if (acct === 'cash') return 'cash';
+  if (acct === 'bank' || String(acct).indexOf('bank:') === 0) return 'bank';
+  return 'cash';
+}
+
+function cashAccountTag(c) {
+  if (!c || c.method !== 'bank') return '<span class="tag tag-gray">Tiền mặt</span>';
+  const a = getBankAccount(c.bankAccountId);
+  return '<span class="tag tag-blue" title="' + esc(bankAccountLabel(a, true)) + '">' + esc(bankAccountLabel(a)) + '</span>';
+}
+
+function bankAccountBalance(a) {
+  let bal = Number(a && a.opening) || 0;
+  (db.cash || []).forEach(c => {
+    if (c.method === 'bank' && c.bankAccountId === a.id) bal += c.type === 'in' ? (Number(c.amount) || 0) : -(Number(c.amount) || 0);
+  });
+  return bal;
+}
 
 function expenseLines(exp) {
   if (!exp) return [];
@@ -5838,7 +5949,11 @@ function handleCostingWipChange(e) {
 
 function filteredCash() {
   let list = db.cash.slice();
-  if (state.cashAccount !== 'all') list = list.filter(c => c.method === state.cashAccount);
+  if (state.cashAccount === 'cash' || state.cashAccount === 'bank') list = list.filter(c => c.method === state.cashAccount);
+  else if (String(state.cashAccount).indexOf('bank:') === 0) {
+    const accountId = String(state.cashAccount).slice(5);
+    list = list.filter(c => c.method === 'bank' && c.bankAccountId === accountId);
+  }
   if (state.cashType !== 'all') list = list.filter(c => c.type === state.cashType);
   if (state.cashCode.trim()) list = list.filter(c => String(c.code || '').toLowerCase().indexOf(state.cashCode.trim().toLowerCase()) !== -1);
   if (state.cashPartner.trim()) list = list.filter(c => String(c.partner || '').toLowerCase().indexOf(state.cashPartner.trim().toLowerCase()) !== -1);
@@ -5849,10 +5964,26 @@ function filteredCash() {
 
 function renderCash() {
   const period = readPeriod('cashFrom', 'cashTo');
-  const openingTotal = (Number(db.openingCash) || 0) + (Number(db.openingBank) || 0);
-  let opening = openingTotal;
-  if (period.from) opening += db.cash.filter(c => c.date && c.date < period.from).reduce((s, c) => s + (c.type === 'in' ? Number(c.amount) || 0 : -(Number(c.amount) || 0)), 0);
-  const periodTxs = db.cash.filter(c => inPeriod(c.date, period));
+  const acct = state.cashAccount;
+  let pool = db.cash;
+  let opening = 0;
+  if (acct === 'cash') {
+    opening = Number(db.openingCash) || 0;
+    pool = db.cash.filter(c => c.method === 'cash');
+  } else if (acct === 'bank') {
+    opening = bankOpeningTotal();
+    pool = db.cash.filter(c => c.method === 'bank');
+  } else if (String(acct).indexOf('bank:') === 0) {
+    const id = String(acct).slice(5);
+    const account = getBankAccount(id);
+    opening = account ? (Number(account.opening) || 0) : 0;
+    pool = db.cash.filter(c => c.method === 'bank' && c.bankAccountId === id);
+  } else {
+    opening = (Number(db.openingCash) || 0) + bankOpeningTotal();
+    pool = db.cash;
+  }
+  if (period.from) opening += pool.filter(c => c.date && c.date < period.from).reduce((s, c) => s + (c.type === 'in' ? Number(c.amount) || 0 : -(Number(c.amount) || 0)), 0);
+  const periodTxs = pool.filter(c => inPeriod(c.date, period));
   const allIn = periodTxs.filter(c => c.type === 'in').reduce((s, c) => s + Number(c.amount || 0), 0);
   const allOut = periodTxs.filter(c => c.type === 'out').reduce((s, c) => s + Number(c.amount || 0), 0);
   $('#cashOpening').textContent = money(opening);
@@ -5863,13 +5994,22 @@ function renderCash() {
   $('#cashOut').title = money(allOut);
   $('#cashBalance').textContent = money(opening + allIn - allOut);
   $('#cashBalance').title = $('#cashBalance').textContent;
+  const bankWrap = $('#cashBankAccounts');
+  if (bankWrap) {
+    bankWrap.innerHTML = (db.bankAccounts || []).map(a =>
+      '<div class="side-link side-sub" data-cash-account="bank:' + a.id + '" title="' + esc(bankAccountLabel(a, true)) + '">' + esc(bankAccountLabel(a)) + '</div>'
+    ).join('');
+  }
   $$('[data-cash-account]').forEach(el => el.classList.toggle('active', el.dataset.cashAccount === state.cashAccount));
   $$('[data-cash-type]').forEach(el => el.classList.toggle('active', el.dataset.cashType === state.cashType));
   $('#cashUnknown').classList.toggle('active', state.cashUnknown);
   const list = filteredCash().filter(c => inPeriod(c.date, period));
   const wrap = $('#cashTableWrap');
   if (!list.length) {
-    wrap.innerHTML = '<div class="empty"><strong>Không có giao dịch phù hợp</strong>Thử đổi giai đoạn, bỏ bộ lọc hoặc tạo phiếu thu/chi mới.<div style="margin-top:10px"><button class="btn btn-primary" data-action="new-cash" data-type="in" data-method="' + (state.cashAccount === 'bank' ? 'bank' : 'cash') + '">+ Phiếu thu</button> <button class="btn" data-action="new-cash" data-type="out" data-method="' + (state.cashAccount === 'bank' ? 'bank' : 'cash') + '">+ Phiếu chi</button></div></div>';
+    const method = cashAccountMethod(state.cashAccount);
+    const bankAcct = String(state.cashAccount).indexOf('bank:') === 0 ? String(state.cashAccount).slice(5) : '';
+    const acctAttr = bankAcct ? ' data-bank-acct="' + esc(bankAcct) + '"' : '';
+    wrap.innerHTML = '<div class="empty"><strong>Không có giao dịch phù hợp</strong>Thử đổi giai đoạn, bỏ bộ lọc hoặc tạo phiếu thu/chi mới.<div style="margin-top:10px"><button class="btn btn-primary" data-action="new-cash" data-type="in" data-method="' + method + '"' + acctAttr + '>+ Phiếu thu</button> <button class="btn" data-action="new-cash" data-type="out" data-method="' + method + '"' + acctAttr + '>+ Phiếu chi</button></div></div>';
     return;
   }
   const rows = list.map(c => {
@@ -5880,6 +6020,7 @@ function renderCash() {
     const autoTag = c.ref ? '<span class="tag tag-gray">Tự động</span>' : '';
     return '<tr>' +
       '<td class="nowrap">' + codeHtml + '</td>' +
+      '<td class="nowrap">' + cashAccountTag(c) + '</td>' +
       '<td>' + esc(c.partner || '—') + '</td>' +
       '<td title="' + esc(cashLines(c).map(l => (l.category || '') + ': ' + money(l.amount)).join('\n')) + '">' + esc(lineSummary(cashLines(c), c.category)) + (cashLines(c).length > 1 ? ' <span class="tag tag-gray">' + cashLines(c).length + ' dòng</span>' : '') + autoTag + '</td>' +
       '<td class="muted">' + esc(c.note || '') + '</td>' +
@@ -5892,6 +6033,7 @@ function renderCash() {
     '<table class="grid">' +
       '<thead><tr>' +
         '<th>Mã chứng từ<span class="th-filter">⋮</span></th>' +
+        '<th>Tài khoản<span class="th-filter">⋮</span></th>' +
         '<th>Người nộp/nhận<span class="th-filter">⋮</span></th>' +
         '<th>Hạng mục Thu/Chi<span class="th-filter">⋮</span></th>' +
         '<th>Lý do<span class="th-filter">⋮</span></th>' +
@@ -5922,8 +6064,27 @@ function renderAccountBook(method) {
   const isCash = method === 'cash';
   const prefix = isCash ? 'cashbook' : 'bankbook';
   const period = readPeriod(prefix + 'From', prefix + 'To');
-  const allTxs = db.cash.filter(c => c.method === method);
-  let opening = Number(isCash ? db.openingCash : db.openingBank) || 0;
+  let accountId = 'all';
+  if (!isCash) {
+    const accounts = db.bankAccounts || [];
+    if (!accounts.some(a => a.id === state.bankbookAccount)) state.bankbookAccount = 'all';
+    accountId = state.bankbookAccount || 'all';
+    const sel = $('#bankbookAccount');
+    if (sel) {
+      sel.innerHTML = '<option value="all">Tất cả ngân hàng</option>' + accounts.map(a =>
+        '<option value="' + a.id + '">' + esc(bankAccountLabel(a, true)) + '</option>'
+      ).join('');
+      sel.value = accountId;
+    }
+  }
+  const allTxs = db.cash.filter(c => c.method === method && (isCash || accountId === 'all' || c.bankAccountId === accountId));
+  let opening = 0;
+  if (isCash) opening = Number(db.openingCash) || 0;
+  else if (accountId === 'all') opening = bankOpeningTotal();
+  else {
+    const account = getBankAccount(accountId);
+    opening = account ? (Number(account.opening) || 0) : 0;
+  }
   if (period.from) opening += allTxs.filter(c => c.date && c.date < period.from).reduce((s, c) => s + (c.type === 'in' ? Number(c.amount) || 0 : -(Number(c.amount) || 0)), 0);
   const txs = allTxs.filter(c => inPeriod(c.date, period));
   const sumIn = txs.filter(c => c.type === 'in').reduce((s, c) => s + Number(c.amount || 0), 0);
@@ -5938,7 +6099,11 @@ function renderAccountBook(method) {
   $('#' + prefix + 'Balance').textContent = money(balance);
   $('#' + prefix + 'Balance').title = money(balance);
   const meta = $('#' + prefix + 'Meta');
-  if (meta) meta.textContent = txs.length + ' giao dịch · Số dư cuối kỳ: ' + money(balance);
+  if (meta) {
+    let metaText = txs.length + ' giao dịch · Số dư cuối kỳ: ' + money(balance);
+    if (!isCash && accountId !== 'all') metaText += ' · ' + bankAccountLabel(getBankAccount(accountId), true);
+    meta.textContent = metaText;
+  }
   const searchEl = $('#' + prefix + 'Search');
   const q = searchEl ? searchEl.value.trim().toLowerCase() : '';
   let list = txs.slice();
@@ -5946,15 +6111,17 @@ function renderAccountBook(method) {
   list.sort((a, b) => a.date === b.date ? 0 : (a.date < b.date ? 1 : -1));
   const wrap = $('#' + prefix + 'TableWrap');
   if (!list.length) {
+    const acctAttr = !isCash && accountId !== 'all' ? ' data-bank-acct="' + esc(accountId) + '"' : '';
     wrap.innerHTML = allTxs.length
       ? '<div class="empty"><strong>Không có giao dịch trong giai đoạn</strong>Chọn lại khoảng ngày hoặc bấm “Tất cả”.</div>'
-      : '<div class="empty"><strong>Chưa có giao dịch</strong>Bấm nút bên dưới để ghi nhận.<div style="margin-top:10px"><button class="btn btn-primary" data-action="new-cash" data-type="in" data-method="' + method + '">+ Phiếu thu</button> <button class="btn" data-action="new-cash" data-type="out" data-method="' + method + '">+ Phiếu chi</button></div></div>';
+      : '<div class="empty"><strong>Chưa có giao dịch</strong>Bấm nút bên dưới để ghi nhận.<div style="margin-top:10px"><button class="btn btn-primary" data-action="new-cash" data-type="in" data-method="' + method + '"' + acctAttr + '>+ Phiếu thu</button> <button class="btn" data-action="new-cash" data-type="out" data-method="' + method + '"' + acctAttr + '>+ Phiếu chi</button></div></div>';
     return;
   }
   const rows = list.map(c =>
     '<tr>' +
       '<td class="nowrap">' + bookCodeHtml(c) + '</td>' +
       '<td class="nowrap">' + fmtDate(c.date) + '</td>' +
+      (isCash ? '' : '<td class="nowrap">' + esc(bankAccountLabel(getBankAccount(c.bankAccountId), true)) + '</td>') +
       '<td>' + esc(c.note || lineSummary(cashLines(c), c.category)) + '</td>' +
       '<td>' + esc(c.partner || '—') + '</td>' +
       '<td class="num pos">' + (c.type === 'in' ? money(c.amount) : '') + '</td>' +
@@ -5962,7 +6129,7 @@ function renderAccountBook(method) {
       '<td class="actions">' + ((c.ref || cashExpenseLinked(c)) ? '' : '<a class="link-danger" data-action="delete-cash" data-id="' + c.id + '">Xóa</a>') + '</td>' +
     '</tr>'
   ).join('');
-  wrap.innerHTML = '<table class="grid"><thead><tr><th>Mã chứng từ<span class="th-filter">⋮</span></th><th>Ngày<span class="th-filter">⋮</span></th><th>Diễn giải</th><th>Người nộp/nhận<span class="th-filter">⋮</span></th><th class="num">Thu</th><th class="num">Chi</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>';
+  wrap.innerHTML = '<table class="grid"><thead><tr><th>Mã chứng từ<span class="th-filter">⋮</span></th><th>Ngày<span class="th-filter">⋮</span></th>' + (isCash ? '' : '<th>Tài khoản</th>') + '<th>Diễn giải</th><th>Người nộp/nhận<span class="th-filter">⋮</span></th><th class="num">Thu</th><th class="num">Chi</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>';
 }
 
 function renderCashBooks() {
@@ -7563,9 +7730,107 @@ function reopenPeriod() {
   toast('Đã mở khóa kỳ ' + formatMonthLabel(reopened));
 }
 
+function renderBankAccountsSummary() {
+  const wrap = $('#bankAccountsSummary');
+  if (!wrap) return;
+  const accounts = db.bankAccounts || [];
+  if (!accounts.length) {
+    wrap.innerHTML = '<div class="empty" style="padding:16px 4px"><strong>Chưa có tài khoản ngân hàng</strong>Bấm “Quản lý tài khoản” để thêm tài khoản.</div>';
+    return;
+  }
+  const rows = accounts.map(a =>
+    '<tr><td><strong>' + esc(a.bankName) + '</strong></td>' +
+    '<td>' + (a.accountNo ? esc(a.accountNo) : '<span class="muted">—</span>') + '</td>' +
+    '<td class="num">' + money(a.opening) + '</td>' +
+    '<td class="num">' + money(bankAccountBalance(a)) + '</td></tr>'
+  ).join('');
+  wrap.innerHTML = '<div class="table-wrap"><table class="grid report-grid"><thead><tr><th>Ngân hàng</th><th>Số tài khoản</th><th class="num">Số dư đầu kỳ</th><th class="num">Số dư hiện tại</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+}
+
+function syncBankDraftFromDom() {
+  const body = $('#bankAccountsBody');
+  if (!body) return;
+  state.bankDraft = $$('#bankAccountsBody tr').map(tr => {
+    const get = f => { const el = tr.querySelector('[data-ba="' + f + '"]'); return el ? el.value : ''; };
+    const draft = state.bankDraft[Number(tr.dataset.i)] || {};
+    return { id: draft.id || '', bankName: get('bankName').trim(), accountNo: get('accountNo').trim(), opening: Number(get('opening')) || 0 };
+  });
+}
+
+function renderBankAccountRows() {
+  const body = $('#bankAccountsBody');
+  if (!body) return;
+  if (!state.bankDraft.length) state.bankDraft.push({ id: '', bankName: '', accountNo: '', opening: 0 });
+  body.innerHTML = state.bankDraft.map((a, i) =>
+    '<tr data-i="' + i + '">' +
+      '<td><input type="text" data-ba="bankName" value="' + esc(a.bankName || '') + '" placeholder="Tên ngân hàng"></td>' +
+      '<td><input type="text" data-ba="accountNo" value="' + esc(a.accountNo || '') + '" placeholder="Số tài khoản"></td>' +
+      '<td><input type="number" data-ba="opening" min="0" step="1000" value="' + (Number(a.opening) || 0) + '" style="text-align:right"></td>' +
+      '<td class="actions"><a class="link-danger" data-action="remove-bank-account-row">Xóa</a></td>' +
+    '</tr>'
+  ).join('');
+}
+
+function openBankAccountsModal() {
+  state.bankDraft = (db.bankAccounts || []).map(a => ({
+    id: a.id, bankName: a.bankName || '', accountNo: a.accountNo || '', opening: Number(a.opening) || 0
+  }));
+  renderBankAccountRows();
+  openModal('#bankAccountsModal');
+}
+
+function addBankAccountRow() {
+  syncBankDraftFromDom();
+  state.bankDraft.push({ id: '', bankName: '', accountNo: '', opening: 0 });
+  renderBankAccountRows();
+  const rows = $$('#bankAccountsBody tr');
+  const last = rows[rows.length - 1];
+  const input = last ? last.querySelector('input') : null;
+  if (input) input.focus();
+}
+
+function removeBankAccountRow(btn) {
+  const tr = btn.closest('tr');
+  if (!tr) return;
+  const idx = Number(tr.dataset.i);
+  if (!isFinite(idx)) return;
+  syncBankDraftFromDom();
+  state.bankDraft.splice(idx, 1);
+  renderBankAccountRows();
+}
+
+function saveBankAccounts() {
+  syncBankDraftFromDom();
+  const rows = state.bankDraft;
+  if (!rows.length) { toast('Cần ít nhất một tài khoản ngân hàng', 'warn'); return; }
+  for (const row of rows) {
+    if (!row.bankName) { toast('Nhập tên ngân hàng cho từng tài khoản', 'warn'); return; }
+    if (!isFinite(row.opening) || row.opening < 0) { toast('Số dư đầu kỳ không hợp lệ', 'warn'); return; }
+  }
+  const keepIds = rows.filter(r => r.id).map(r => r.id);
+  const usedRemoved = (db.bankAccounts || []).find(a =>
+    keepIds.indexOf(a.id) === -1 && (db.cash || []).some(c => c.method === 'bank' && c.bankAccountId === a.id)
+  );
+  if (usedRemoved) {
+    toast('Tài khoản ' + usedRemoved.bankName + ' đã có giao dịch, không thể xóa. Hãy đổi tên nếu cần.', 'warn');
+    return;
+  }
+  db.bankAccounts = rows.map(r => ({
+    id: r.id || uid('ba'), bankName: r.bankName, accountNo: r.accountNo, opening: Math.max(0, r.opening)
+  }));
+  ensureBankAccounts();
+  if (String(state.cashAccount).indexOf('bank:') === 0 && !getBankAccount(String(state.cashAccount).slice(5))) state.cashAccount = 'all';
+  if (state.bankbookAccount !== 'all' && !getBankAccount(state.bankbookAccount)) state.bankbookAccount = 'all';
+  save();
+  closeModal('#bankAccountsModal');
+  renderAll();
+  toast('Đã lưu tài khoản ngân hàng');
+}
+
 function renderData() {
   ensureOpeningData();
   renderOpeningCards();
+  renderBankAccountsSummary();
   const size = (new Blob([JSON.stringify(db)]).size / 1024).toFixed(1);
   const rows = [
     { label: 'Thành phẩm', value: db.products.length, page: 'products', prodsheet: 'catalog' },
@@ -7848,6 +8113,7 @@ function openOpeningItem(kind) {
   ensureOpeningData();
   const info = OPENING_ITEMS[kind];
   if (!info) return;
+  if (kind === 'bank') { openBankAccountsModal(); return; }
   if (info.type === 'stock') { openOpeningStockModal(); return; }
   state.openingKind = kind;
   const title = $('#oiTitle');
@@ -8908,15 +9174,31 @@ function removeCashLine(i) {
   renderCashLines();
 }
 
-function openCashModal(type, method) {
+function syncCashBankField() {
+  const field = $('#cBankAccountField');
+  const methodSelect = $('#cMethod');
+  if (field && methodSelect) field.hidden = methodSelect.value !== 'bank';
+}
+
+function openCashModal(type, method, bankAccountId) {
   state.cashModalType = type;
   $('#cashModalTitle').textContent = type === 'in' ? 'Phiếu thu' : 'Phiếu chi';
   $('#cDate').value = todayISO();
   $('#cMethod').value = method || 'cash';
+  const accounts = db.bankAccounts || [];
+  const bankSel = $('#cBankAccount');
+  if (bankSel) {
+    bankSel.innerHTML = accounts.length
+      ? accounts.map(a => '<option value="' + a.id + '">' + esc(bankAccountLabel(a, true)) + '</option>').join('')
+      : '<option value="">— Chưa có tài khoản, hãy quản lý tài khoản ngân hàng —</option>';
+    const preferred = bankAccountId || (String(state.cashAccount).indexOf('bank:') === 0 ? String(state.cashAccount).slice(5) : '') || (state.bankbookAccount !== 'all' ? state.bankbookAccount : '') || (accounts[0] ? accounts[0].id : '');
+    if (accounts.some(a => a.id === preferred)) bankSel.value = preferred;
+  }
   $('#cPartner').value = '';
   $('#cNote').value = '';
   state.cashDraftLines = [{ category: CASH_CATS[type === 'in' ? 'in' : 'out'][0], amount: 0 }];
   renderCashLines();
+  syncCashBankField();
   openModal('#cashModal');
   setTimeout(() => { const el = $('#cLinesBody input[data-f="amount"]'); if (el) el.focus(); }, 30);
 }
@@ -8925,6 +9207,7 @@ function saveCash() {
   const type = state.cashModalType;
   const date = $('#cDate').value;
   const method = $('#cMethod').value;
+  const bankAccountId = method === 'bank' ? ($('#cBankAccount') ? $('#cBankAccount').value : '') : null;
   const partner = $('#cPartner').value.trim();
   const note = $('#cNote').value.trim();
   const lines = (state.cashDraftLines || []).map(l => ({ category: l.category, amount: Number(l.amount) || 0 })).filter(l => l.category && l.amount > 0);
@@ -8932,6 +9215,7 @@ function saveCash() {
   const category = lineSummary(lines, type === 'in' ? 'Thu khác' : 'Chi khác');
   if (!date) { toast('Chọn ngày giao dịch', 'warn'); return; }
   if (!ensureUnlocked(date, 'tạo phiếu thu/chi')) return;
+  if (method === 'bank' && !bankAccountId) { toast('Chọn tài khoản ngân hàng cho phiếu', 'warn'); return; }
   if (!lines.length) { toast('Thêm ít nhất một dòng có hạng mục và số tiền', 'warn'); return; }
   const linkedPartner = findPartnerByName(partner);
   const linkedEmployee = findEmployeeByName(partner);
@@ -8940,7 +9224,7 @@ function saveCash() {
     category: category, lines: lines, partner: partner,
     partnerId: linkedPartner ? linkedPartner.id : null,
     employeeId: !linkedPartner && linkedEmployee ? linkedEmployee.id : null,
-    method: method, amount: amount,
+    method: method, bankAccountId: bankAccountId, amount: amount,
     note: note || category, ref: null
   };
   db.cash.push(tx);
@@ -9737,13 +10021,15 @@ function restoreJSON(e) {
         partners: migratePartners(d),
         employees: Array.isArray(d.employees) ? d.employees : sampleEmployees(),
         docs: d.docs,
-        cash: d.cash
+        cash: d.cash,
+        bankAccounts: Array.isArray(d.bankAccounts) ? d.bankAccounts : []
       };
       if (db.openingBank == null) {
         const total = Number(db.openingCash) || 0;
         db.openingCash = Math.round(total / 2);
         db.openingBank = total - db.openingCash;
       }
+      ensureBankAccounts();
       ensureProductOpeningCosts();
       ensureMaterialOpeningCosts();
       ensureCalcRuns();
@@ -9771,6 +10057,7 @@ function loadSample() {
   db = sampleData();
   ensureCalcRuns();
   ensureOpeningData();
+  ensureBankAccounts();
   ensureProductOpeningCosts();
   ensureMaterialOpeningCosts();
   syncExpenses();
@@ -9787,7 +10074,8 @@ function loadSample() {
 
 function wipeData() {
   if (!confirm('Xóa toàn bộ dữ liệu? Hành động này không thể hoàn tác.')) return;
-  db = { openingCash: 0, openingBank: 0, openingReceivables: [], openingPayables: [], openingEmployees: [], openingWip: [], advances: [], openingOthers: { tools: 0, fixedAssets: 0, prepaid: 0, unearned: 0, wip: 0 }, closedThrough: '', closeHistory: [], partners: [], employees: [], products: [], materials: [], boms: [], productions: [], materialReceipts: [], expenses: [], expenseCategories: [], costAllocations: [], costMethods: {}, calcRuns: { materials: {}, costing: {}, cogs: {} }, docs: [], cash: [] };
+  db = { openingCash: 0, openingBank: 0, openingReceivables: [], openingPayables: [], openingEmployees: [], openingWip: [], advances: [], openingOthers: { tools: 0, fixedAssets: 0, prepaid: 0, unearned: 0, wip: 0 }, closedThrough: '', closeHistory: [], partners: [], employees: [], products: [], materials: [], boms: [], productions: [], materialReceipts: [], expenses: [], expenseCategories: [], costAllocations: [], costMethods: {}, calcRuns: { materials: {}, costing: {}, cogs: {} }, docs: [], cash: [], bankAccounts: [] };
+  ensureBankAccounts();
   save();
   renderAll();
   toast('Đã xóa toàn bộ dữ liệu');
@@ -9819,7 +10107,7 @@ function handleAction(btn) {
     case 'add-doc-line': addDocLine(); break;
     case 'remove-doc-line': removeDocLine(Number(id)); break;
     case 'save-doc': saveDoc(); break;
-    case 'new-cash': openCashModal(btn.dataset.type || 'in', btn.dataset.method); break;
+    case 'new-cash': openCashModal(btn.dataset.type || 'in', btn.dataset.method, btn.dataset.bankAcct || null); break;
     case 'add-cash-line': addCashLine(); break;
     case 'remove-cash-line': removeCashLine(Number(id)); break;
     case 'save-cash': saveCash(); break;
@@ -9922,6 +10210,10 @@ function handleAction(btn) {
     case 'save-opening': saveOpeningItem(); break;
     case 'save-opening-item': saveOpeningItem(); break;
     case 'open-opening': openOpeningItem(btn.dataset.kind); break;
+    case 'manage-bank-accounts': openBankAccountsModal(); break;
+    case 'add-bank-account-row': addBankAccountRow(); break;
+    case 'remove-bank-account-row': removeBankAccountRow(btn); break;
+    case 'save-bank-accounts': saveBankAccounts(); break;
     case 'add-opening-debt': addOpeningDebtRow(); break;
     case 'remove-opening-debt': removeOpeningDebtRow(Number(id)); break;
     case 'add-opening-wip': addOpeningWipRow(); break;
@@ -10162,6 +10454,8 @@ function bindEvents() {
   $('#oiWipBody').addEventListener('change', onOpeningWipInput);
   $('#cashbookSearch').addEventListener('input', () => renderAccountBook('cash'));
   $('#bankbookSearch').addEventListener('input', () => renderAccountBook('bank'));
+  $('#bankbookAccount').addEventListener('change', e => { state.bankbookAccount = e.target.value; renderAccountBook('bank'); });
+  $('#cMethod').addEventListener('change', syncCashBankField);
   $('#expenseSearch').addEventListener('input', renderExpenses);
   $('#expenseCategorySearch').addEventListener('input', renderExpenseCategories);
   $('#advanceSearch').addEventListener('input', e => { state.advanceSearch = e.target.value; renderAdvances(); });
