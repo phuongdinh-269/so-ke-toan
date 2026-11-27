@@ -612,6 +612,20 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 .ic-green{background:#4caf8f}
 .ic-yellow{background:#e7a93f}
 .report-toolbar{background:var(--card);border:1px solid #f4e5d9;border-radius:16px;padding:12px 14px;box-shadow:0 10px 22px rgba(180,110,80,.06)}
+.report-toolbar[hidden]{display:none!important}
+.page-meta:empty{display:none}
+.report-catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;padding:16px}
+.report-category{grid-column:1/-1;color:#a4958a;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin:8px 2px -2px}
+.report-card{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:16px;border:1px solid var(--rc-line,#f2e2d6);background:var(--rc-bg,#fffaf4);color:var(--ink);font-family:inherit;font-size:12.5px;font-weight:600;text-align:left;cursor:pointer;transition:.15s;line-height:1.35}
+.report-card:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(180,110,80,.14)}
+.report-card .rc-icon{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.85);color:var(--rc-fg,var(--tea-dark));display:grid;place-items:center;flex:none}
+.report-card .rc-icon svg{width:19px;height:19px}
+.report-card.rc-peach{--rc-bg:#ffe7da;--rc-line:#f8d3c2;--rc-fg:#e06a52}
+.report-card.rc-mint{--rc-bg:#e2f5ef;--rc-line:#c9ece2;--rc-fg:#227a70}
+.report-card.rc-butter{--rc-bg:#fff0d6;--rc-line:#f6e0b6;--rc-fg:#b9821f}
+.report-card.rc-lilac{--rc-bg:#efe9fb;--rc-line:#ded2f7;--rc-fg:#7b62c4}
+.report-card.rc-rose{--rc-bg:#ffe8ef;--rc-line:#f8d0dc;--rc-fg:#d95d7e}
+.report-card.rc-sky{--rc-bg:#e3f3fb;--rc-line:#cae9f6;--rc-fg:#3d8fb3}
 .report-side{background:var(--card);border:1px solid #f4e5d9;border-radius:18px;box-shadow:0 12px 28px rgba(180,110,80,.08);top:76px;max-height:calc(100vh - 92px);padding:8px 0}
 .report-side .report-group{color:#a4958a}
 .report-side button{border-radius:10px;margin:1px 6px;width:calc(100% - 12px);color:#6c5f58;font-weight:600;padding:9px 10px}
@@ -1400,6 +1414,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
   <div class="content">
     <div class="report-layout">
       <aside class="report-side no-print" id="reportSide">
+        <button data-report="center">Danh mục báo cáo</button>
         <div class="report-group">Tiền</div>
         <button data-report="cashflow">Báo cáo dòng tiền</button>
         <button data-report="cashbook">Sổ chi tiết tiền mặt</button>
@@ -1421,7 +1436,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
         <button data-report="material-nxt">NXT nguyên vật liệu</button>
       </aside>
       <div class="report-main">
-        <div class="report-toolbar no-print">
+        <div class="report-toolbar no-print" id="reportToolbar">
           <div class="field"><label>Từ ngày</label><input type="date" id="repFrom"></div>
           <div class="field"><label>Đến ngày</label><input type="date" id="repTo"></div>
           <div class="field" id="repBankAccountWrap" hidden><label>Tài khoản ngân hàng</label><select id="repBankAccount"></select></div>
@@ -3649,6 +3664,7 @@ function renderNav() {
     '<div class="nav-item">' +
       '<button class="nav-link" data-nav="reports" data-toggle="menu">' + icon('chart') + '<span>Báo cáo</span><span class="nav-caret">▾</span></button>' +
       '<div class="menu">' +
+        '<button data-page="reports" data-report="center">' + icon('chart') + '<span>Trung tâm báo cáo</span></button>' +
         '<button data-page="reports" data-report="cashflow">' + icon('wallet') + '<span>Báo cáo dòng tiền</span></button>' +
         '<button data-page="reports" data-report="cashbook">' + icon('cashin') + '<span>Sổ chi tiết tiền mặt</span></button>' +
         '<button data-page="reports" data-report="bankbook">' + icon('bank') + '<span>Sổ chi tiết tiền gửi NH</span></button>' +
@@ -3656,7 +3672,6 @@ function renderNav() {
         '<button data-page="reports" data-report="ar-summary">' + icon('receipt') + '<span>Công nợ phải thu KH</span></button>' +
         '<button data-page="reports" data-report="employee-summary">' + icon('wallet') + '<span>Công nợ nhân viên</span></button>' +
         '<button data-page="reports" data-report="inventory-summary">' + icon('box') + '<span>Tồn kho</span></button>' +
-        '<button data-page="reports">' + icon('chart') + '<span>Trung tâm báo cáo</span></button>' +
         '<button data-page="pnl">' + icon('trend') + '<span>Báo cáo lãi lỗ</span></button>' +
       '</div>' +
     '</div>';
@@ -6705,6 +6720,7 @@ function cashBookReportHtml(method, openingBase, from, to, periodText) {
 }
 
 const REPORT_TITLES = {
+  center: 'Danh mục báo cáo',
   cashflow: 'Báo cáo dòng tiền',
   cashbook: 'Sổ chi tiết tiền mặt',
   bankbook: 'Sổ chi tiết tiền gửi ngân hàng',
@@ -6724,6 +6740,39 @@ const REPORT_TITLES = {
 
 function reportTitle(kind) {
   return REPORT_TITLES[kind] || 'Báo cáo';
+}
+
+function reportCatalogHtml() {
+  const tones = ['peach', 'mint', 'butter', 'lilac', 'rose', 'sky'];
+  let toneIndex = 0;
+  const card = (iconName, label, attrs) => {
+    const tone = tones[toneIndex++ % tones.length];
+    return '<button type="button" class="report-card rc-' + tone + '" ' + attrs + '>' +
+      '<span class="rc-icon">' + icon(iconName) + '</span><span>' + label + '</span></button>';
+  };
+  const group = title => '<div class="report-category">' + title + '</div>';
+  return '<div class="report-catalog">' +
+    group('Tiền') +
+    card('wallet', 'Báo cáo dòng tiền', 'data-report="cashflow"') +
+    card('cashin', 'Sổ chi tiết tiền mặt', 'data-report="cashbook"') +
+    card('bank', 'Sổ chi tiết tiền gửi ngân hàng', 'data-report="bankbook"') +
+    group('Công nợ') +
+    card('cart', 'Tổng hợp công nợ phải trả NCC', 'data-report="ap-summary"') +
+    card('cart', 'Chi tiết công nợ phải trả NCC', 'data-report="ap-detail"') +
+    card('receipt', 'Chi tiết công nợ phải trả NCC theo hóa đơn', 'data-report="ap-invoice"') +
+    card('receipt', 'Tổng hợp công nợ phải thu KH', 'data-report="ar-summary"') +
+    card('receipt', 'Chi tiết công nợ phải thu KH', 'data-report="ar-detail"') +
+    card('receipt', 'Chi tiết công nợ phải thu KH theo hóa đơn', 'data-report="ar-invoice"') +
+    card('users', 'Tổng hợp công nợ nhân viên', 'data-report="employee-summary"') +
+    card('users', 'Chi tiết công nợ nhân viên', 'data-report="employee-detail"') +
+    group('Kho') +
+    card('box', 'Bảng tổng hợp tồn kho', 'data-report="inventory-summary"') +
+    card('box', 'Bảng chi tiết vật tư, hàng hóa', 'data-report="inventory-detail"') +
+    card('box', 'Nhập – xuất – tồn thành phẩm', 'data-report="product-nxt"') +
+    card('layers', 'Nhập – xuất – tồn nguyên vật liệu', 'data-report="material-nxt"') +
+    group('Lợi nhuận') +
+    card('trend', 'Báo cáo lãi lỗ', 'data-page="pnl"') +
+    '</div>';
 }
 
 function cashBalanceBefore(method, date) {
@@ -7456,6 +7505,14 @@ function renderReports() {
   if (titleEl) titleEl.textContent = title;
   if (pageMeta) pageMeta.textContent = title;
   $$('#reportSide [data-report]').forEach(b => b.classList.toggle('active', b.dataset.report === kind));
+  const reportToolbar = $('#reportToolbar');
+  if (reportToolbar) reportToolbar.hidden = kind === 'center';
+  if (kind === 'center') {
+    if (periodEl) periodEl.textContent = '';
+    content.innerHTML = reportCatalogHtml();
+    if (noteEl) noteEl.textContent = 'Chọn một báo cáo để xem chi tiết.';
+    return;
+  }
   const isBankReport = kind === 'bankbook';
   const bankWrap = $('#repBankAccountWrap');
   const bankSel = $('#repBankAccount');
