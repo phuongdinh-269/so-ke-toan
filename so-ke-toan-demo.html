@@ -590,6 +590,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
 .side-sub.active::before{background:var(--tea-dark)}
 .side-manage{margin:6px 8px 2px;color:var(--tea-dark);font-weight:700;font-size:11.5px}
 #bankbookAccount{max-width:250px}
+#repBankAccountWrap{width:250px}
 #bankAccountsBody td{padding:6px 8px;vertical-align:middle}
 #bankAccountsBody input{width:100%;min-width:110px}
 .cash-titlebar{background:linear-gradient(135deg,#3cb3a2,#2f9d8f);border-radius:14px;height:46px;padding:0 14px;box-shadow:0 12px 24px rgba(47,157,143,.22);margin-bottom:14px}
@@ -706,6 +707,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
   .page-title{font-size:22px;flex-direction:column;align-items:flex-start;gap:5px;padding-top:14px}
   .stat-panel{grid-template-columns:1fr}
   .stat-item{padding:13px}
+  #repBankAccountWrap{width:100%}
 }
 @media print{body{background:#fff}}
 </style>
@@ -1422,6 +1424,7 @@ input.open-input[type=number]{border-radius:10px;height:28px}
         <div class="report-toolbar no-print">
           <div class="field"><label>Từ ngày</label><input type="date" id="repFrom"></div>
           <div class="field"><label>Đến ngày</label><input type="date" id="repTo"></div>
+          <div class="field" id="repBankAccountWrap" hidden><label>Tài khoản ngân hàng</label><select id="repBankAccount"></select></div>
           <button class="btn" data-action="open-debt-filter" id="debtFilterBtn" hidden>Chọn đối tượng</button>
           <button class="btn" data-action="clear-debt-filter" id="debtClearBtn" hidden>Bỏ lọc</button>
           <button class="btn btn-primary" data-action="print-report">In báo cáo</button>
@@ -2408,6 +2411,7 @@ const state = {
   openingDebtRowIndex: null,
   openingWipRows: [],
   reportKind: 'cashflow',
+  reportBankAccount: 'all',
   advanceSearch: '',
   advanceType: 'all'
 };
@@ -6787,15 +6791,17 @@ function reportCashFlowHtml(from, to) {
     '<div class="lines-toolbar" style="margin-top:14px"><strong>Dòng tiền ra theo khoản mục</strong></div>' + cashFlowCategoryTable(outCats, 'Không có dòng tiền ra trong kỳ.');
 }
 
-function reportCashDetailHtml(method, from, to) {
-  const base = method === 'cash' ? db.openingCash : db.openingBank;
-  const account = method === 'cash' ? 'TK 1111' : 'TK 1121';
+function reportCashDetailHtml(method, from, to, accountId) {
+  const specificBank = method === 'bank' && accountId && accountId !== 'all' ? getBankAccount(accountId) : null;
+  const base = method === 'cash' ? db.openingCash : (specificBank ? (Number(specificBank.opening) || 0) : bankOpeningTotal());
+  const account = method === 'cash' ? 'TK 1111' : ('TK 1121' + (specificBank ? ' · ' + bankAccountLabel(specificBank, true) : ''));
   let opening = Number(base) || 0;
   (db.cash || []).forEach(c => {
     if (c.method !== method || c.date >= from) return;
+    if (specificBank && c.bankAccountId !== specificBank.id) return;
     opening += c.type === 'in' ? (Number(c.amount) || 0) : -(Number(c.amount) || 0);
   });
-  const list = (db.cash || []).filter(c => c.method === method && c.date >= from && c.date <= to)
+  const list = (db.cash || []).filter(c => c.method === method && c.date >= from && c.date <= to && (!specificBank || c.bankAccountId === specificBank.id))
     .slice().sort((a, b) => a.date === b.date ? String(a.code).localeCompare(String(b.code)) : (a.date < b.date ? -1 : 1));
   let balance = opening;
   let sumIn = 0;
@@ -7449,6 +7455,18 @@ function renderReports() {
   if (titleEl) titleEl.textContent = title;
   if (pageMeta) pageMeta.textContent = title;
   $$('#reportSide [data-report]').forEach(b => b.classList.toggle('active', b.dataset.report === kind));
+  const isBankReport = kind === 'bankbook';
+  const bankWrap = $('#repBankAccountWrap');
+  const bankSel = $('#repBankAccount');
+  if (bankWrap) bankWrap.hidden = !isBankReport;
+  if (bankSel && isBankReport) {
+    const accounts = db.bankAccounts || [];
+    if (!accounts.some(a => a.id === state.reportBankAccount)) state.reportBankAccount = 'all';
+    bankSel.innerHTML = '<option value="all">Tất cả ngân hàng</option>' + accounts.map(a =>
+      '<option value="' + a.id + '">' + esc(bankAccountLabel(a, true)) + '</option>'
+    ).join('');
+    bankSel.value = state.reportBankAccount;
+  }
   const filterKind = debtFilterKindForReport(kind);
   const filterBtn = $('#debtFilterBtn');
   const clearBtn = $('#debtClearBtn');
@@ -7481,8 +7499,9 @@ function renderReports() {
       note = 'Sổ chi tiết tiền mặt (TK 1111); số dư đầu kỳ đã gồm các giao dịch trước kỳ báo cáo.';
       break;
     case 'bankbook':
-      html = reportCashDetailHtml('bank', from, to);
+      html = reportCashDetailHtml('bank', from, to, state.reportBankAccount);
       note = 'Sổ chi tiết tiền gửi ngân hàng (TK 1121); số dư đầu kỳ đã gồm các giao dịch trước kỳ báo cáo.';
+      if (state.reportBankAccount !== 'all') note += ' Đang lọc theo tài khoản ' + bankAccountLabel(getBankAccount(state.reportBankAccount), true) + '.';
       break;
     case 'ap-summary':
       html = debtSummaryHtml('ap', from, to);
@@ -7821,6 +7840,7 @@ function saveBankAccounts() {
   ensureBankAccounts();
   if (String(state.cashAccount).indexOf('bank:') === 0 && !getBankAccount(String(state.cashAccount).slice(5))) state.cashAccount = 'all';
   if (state.bankbookAccount !== 'all' && !getBankAccount(state.bankbookAccount)) state.bankbookAccount = 'all';
+  if (state.reportBankAccount !== 'all' && !getBankAccount(state.reportBankAccount)) state.reportBankAccount = 'all';
   save();
   closeModal('#bankAccountsModal');
   renderAll();
@@ -10490,6 +10510,7 @@ function bindEvents() {
   $('#topProductsRange').addEventListener('change', e => { state.topProductsRange = e.target.value; drawTopProductsChart(); });
   $('#repFrom').addEventListener('change', renderReports);
   $('#repTo').addEventListener('change', renderReports);
+  $('#repBankAccount').addEventListener('change', e => { state.reportBankAccount = e.target.value; renderReports(); });
   $('#debtFilterAll').addEventListener('change', e => setDebtFilterVisible(e.target.checked));
   $('#debtFilterBody').addEventListener('change', updateDebtFilterSummary);
   $('#debtFilterGroup').addEventListener('change', renderDebtFilterList);
